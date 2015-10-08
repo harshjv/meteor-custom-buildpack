@@ -90,6 +90,8 @@ echo "-----> Pre-launching Meteor to create packages assets and prevent bundling
 fi
 # </hack>
 
+mkdir -p "$COMPILE_DIR/app"
+
 echo "-----> Getting meteor pre-built application"
 # NODE_VERSION=`curl -sS --get ${CACHE_URL}custom/semver.io/node/resolve/0.10.x/`
 LIBREBOARD_PREBUILT_URL="${CACHE_URL}libreboard/bundle.tar.gz"
