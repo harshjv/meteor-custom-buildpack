@@ -65,7 +65,7 @@ METEOR="$METEOR_DIR/.meteor/meteor" # The meteor binary.
 #
 # Build the meteor app!
 #
-echo "-----> Removing android and ios targets"
+echo "-----> (test) Removing android and ios targets"
 cd $APP_CHECKOUT_DIR
 
 # Now on to bundling. Don't put the bundle in $APP_CHECKOUT_DIR, or it will
@@ -93,7 +93,7 @@ fi
 echo "-----> Getting meteor pre-built application"
 # NODE_VERSION=`curl -sS --get ${CACHE_URL}custom/semver.io/node/resolve/0.10.x/`
 LIBREBOARD_PREBUILT_URL="${CACHE_URL}libreboard/bundle.tar.gz"
-curl -sS $LIBREBOARD_PREBUILT_URL -o - | tar -zxf - -C "$COMPILE_DIR/app" --strip 1
+curl -S $LIBREBOARD_PREBUILT_URL -o - | tar -zxf - -C "$COMPILE_DIR/app" --strip 1
 
 
 #
