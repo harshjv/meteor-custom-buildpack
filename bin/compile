@@ -84,7 +84,7 @@ echo "-----> Removed android and ios targets"
 # Also remember to use 'heroku stack:set cedar-14' to allow certain recompiled
 # packages to use the newer version memcpy that ships with a more recent version
 # of glibc (contained in cedar-14)
-if [ -n "${BUILDPACK_PRELAUNCH_METEOR+1}" ]; then 
+if [ -n "${BUILDPACK_PRELAUNCH_METEOR+1}" ]; then
 echo "-----> Pre-launching Meteor to create packages assets and prevent bundling from failing"
     HOME=$METEOR_DIR timeout -s9 60 $METEOR --settings settings.json || true
 fi
@@ -97,6 +97,10 @@ echo "-----> Getting meteor pre-built application"
 LIBREBOARD_PREBUILT_URL="${CACHE_URL}libreboard/bundle.tar.gz"
 curl -S $LIBREBOARD_PREBUILT_URL -o - | tar -zxf - -C "$COMPILE_DIR/app" --strip 1
 
+# If we use npm, run npm install.
+if [ -e "$COMPILE_DIR"/app/programs/server/package.json ]; then
+  cd "$COMPILE_DIR"/app/programs/server && npm install
+fi
 
 #
 # Environment
